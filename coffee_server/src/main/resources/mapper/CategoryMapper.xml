@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atren.server.mapper.CategoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.atren.server.pojo.Category">
+        <id column="category_id" property="categoryId" />
+        <result column="category_name" property="categoryName" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        category_id, category_name
+    </sql>
+
+    <!--获取在指定类别下的商品数目-->
+    <select id="getProductNumberInCategory" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM t_product p JOIN t_category c
+        ON p.category_id = c.category_id
+        WHERE c.category_id = #{id}
+    </select>
+    <!--通过类别名称获取类别id-->
+    <select id="selectCategoryIdByCategoryName" resultType="java.lang.Integer">
+        SELECT
+        t_category.category_id
+        from t_category
+        WHERE t_category.category_name = #{categoryName}
+    </select>
+
+</mapper>

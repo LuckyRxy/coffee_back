@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atren.server.mapper.CollectMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.atren.server.pojo.Collect">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="product_id" property="productId" />
+        <result column="collect_time" property="collectTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id, product_id, collect_time
+    </sql>
+
+    <resultMap id="Products" type="com.atren.server.pojo.Product">
+        <id column="product_id" property="productId" />
+        <result column="product_name" property="productName" />
+        <result column="category_id" property="categoryId" />
+        <result column="product_title" property="productTitle" />
+        <result column="product_intro" property="productIntro" />
+        <result column="product_picture" property="productPicture" />
+        <result column="product_price" property="productPrice" />
+        <result column="product_num" property="productNum" />
+        <result column="product_sales" property="productSales" />
+    </resultMap>
+
+    <!--根据用户id获取用户收藏夹中商品-->
+    <select id="getProductsFromCollect" resultMap="Products">
+        SELECT
+            p.*
+        FROM
+            t_collect c
+        LEFT JOIN t_product p ON c.product_id = p.product_id
+        LEFT JOIN t_user s ON c.user_id = s.user_id
+        WHERE s.user_id = #{id}
+    </select>
+
+</mapper>

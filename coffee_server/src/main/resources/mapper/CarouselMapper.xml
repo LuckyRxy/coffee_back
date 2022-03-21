@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atren.server.mapper.CarouselMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.atren.server.pojo.Carousel">
+        <id column="carousel_id" property="carouselId" />
+        <result column="imgPath" property="imgPath" />
+        <result column="describes" property="describes" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        carousel_id, imgPath, describes
+    </sql>
+
+</mapper>
